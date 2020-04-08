@@ -42,7 +42,7 @@ let Trie = function () {
 
   this.print = () => {
     let words = new Array();
-    let search = (node = this.root, string) => {
+    let search = (node, string) => {
       if (node.keys.size != 0) {
         for (let letter of node.keys.keys()) {
           search(node.keys.get(letter), string.concat(letter));
