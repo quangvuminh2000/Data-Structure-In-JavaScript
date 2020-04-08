@@ -4,10 +4,16 @@
 // right child: i*2 + 1
 // parent: i/2
 
+/* Heaps */
+
+// left child: i * 2
+// right child: i * 2 + 1
+// parent: i / 2
+
 let MinHeap = function () {
   let heap = [null];
 
-  this.insert = (num) => {
+  this.insert = function (num) {
     heap.push(num);
     if (heap.length > 2) {
       let idx = heap.length - 1;
@@ -27,18 +33,17 @@ let MinHeap = function () {
     }
   };
 
-  this.remove = () => {
+  this.remove = function () {
     let smallest = heap[1];
     if (heap.length > 2) {
       heap[1] = heap[heap.length - 1];
-      heap.slice(heap.length - 1);
+      heap.splice(heap.length - 1);
       if (heap.length == 3) {
         if (heap[1] > heap[2]) {
           [heap[1], heap[2]] = [heap[2], heap[1]];
         }
         return smallest;
       }
-
       let i = 1;
       let left = 2 * i;
       let right = 2 * i + 1;
@@ -57,14 +62,14 @@ let MinHeap = function () {
         }
       }
     } else if (heap.length == 2) {
-      heap.slice(1, 1);
+      heap.splice(1, 1);
     } else {
       return null;
     }
     return smallest;
   };
 
-  this.sort = () => {
+  this.sort = function () {
     let result = new Array();
     while (heap.length > 1) {
       result.push(this.remove());
@@ -76,7 +81,9 @@ let MinHeap = function () {
 let MaxHeap = function () {
   let heap = [null];
 
-  this.insert = (num) => {
+  this.print = () => heap;
+
+  this.insert = function (num) {
     heap.push(num);
     if (heap.length > 2) {
       let idx = heap.length - 1;
@@ -96,18 +103,17 @@ let MaxHeap = function () {
     }
   };
 
-  this.remove = () => {
+  this.remove = function () {
     let largest = heap[1];
     if (heap.length > 2) {
       heap[1] = heap[heap.length - 1];
-      heap.slice(heap.length - 1);
+      heap.splice(heap.length - 1);
       if (heap.length == 3) {
         if (heap[1] < heap[2]) {
           [heap[1], heap[2]] = [heap[2], heap[1]];
         }
         return largest;
       }
-
       let i = 1;
       let left = 2 * i;
       let right = 2 * i + 1;
@@ -126,14 +132,14 @@ let MaxHeap = function () {
         }
       }
     } else if (heap.length == 2) {
-      heap.slice(1, 1);
+      heap.splice(1, 1);
     } else {
       return null;
     }
     return largest;
   };
 
-  this.sort = () => {
+  this.sort = function () {
     let result = new Array();
     while (heap.length > 1) {
       result.push(this.remove());
@@ -150,9 +156,4 @@ maxHeap.insert(25);
 maxHeap.insert(18);
 maxHeap.insert(24);
 
-console.log(maxHeap.remove());
-console.log(maxHeap.remove());
-console.log(maxHeap.remove());
-console.log(maxHeap.remove());
-console.log(maxHeap.remove());
-console.log(maxHeap.remove());
+console.log(maxHeap.sort());
